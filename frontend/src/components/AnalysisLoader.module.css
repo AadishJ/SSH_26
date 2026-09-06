@@ -1,0 +1,311 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+  animation: fadeIn 0.4s ease;
+}
+
+@media (max-width: 768px) {
+  .container { grid-template-columns: 1fr; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Image section */
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.1);
+}
+
+/* Scan line */
+.scanLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), rgba(99, 102, 241, 0.8), transparent);
+  animation: scan 2s linear infinite;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* Grid overlay */
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Corner brackets */
+.cornerBracketTL, .cornerBracketTR, .cornerBracketBL, .cornerBracketBR {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.cornerBracketTL { top: 10px; left: 10px; border-top: 2px solid #3b82f6; border-left: 2px solid #3b82f6; border-top-left-radius: 4px; }
+.cornerBracketTR { top: 10px; right: 10px; border-top: 2px solid #3b82f6; border-right: 2px solid #3b82f6; border-top-right-radius: 4px; }
+.cornerBracketBL { bottom: 10px; left: 10px; border-bottom: 2px solid #3b82f6; border-left: 2px solid #3b82f6; border-bottom-left-radius: 4px; }
+.cornerBracketBR { bottom: 10px; right: 10px; border-bottom: 2px solid #3b82f6; border-right: 2px solid #3b82f6; border-bottom-right-radius: 4px; }
+
+/* Detection boxes */
+.detectionBox {
+  position: absolute;
+  border: 1px solid rgba(255, 80, 80, 0.8);
+  border-radius: 4px;
+  animation: boxAppear 0.3s ease forwards;
+  background: rgba(255, 80, 80, 0.05);
+}
+
+@keyframes boxAppear {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.box1 { top: 38%; left: 45%; width: 18%; height: 14%; }
+.box2 { top: 55%; left: 58%; width: 15%; height: 12%; }
+
+.detectionLabel {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: rgba(255, 130, 130, 0.9);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* Status badge */
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-accent);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b82f6;
+  animation: pulseDot 1.2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* Steps section */
+.stepsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stepsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stepsTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stepsSubtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Progress circle */
+.progressCircle {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.progressSvg {
+  width: 56px;
+  height: 56px;
+  transform: rotate(-90deg);
+}
+
+.progressText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+/* Steps list */
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stepDone {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.stepActive {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.stepIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.stepDone .stepIcon {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.stepActive .stepIcon {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.step:not(.stepDone):not(.stepActive) .stepIcon {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  border: 1px solid var(--border-secondary);
+}
+
+.stepSpinner {
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.stepContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.stepLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.stepDone .stepLabel { color: rgba(255,255,255,0.6); }
+.step:not(.stepDone):not(.stepActive) .stepLabel { color: var(--text-muted); }
+
+.stepDetail {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.stepProgress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(59, 130, 246, 0.1);
+  overflow: hidden;
+}
+
+.stepProgressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 1px;
+  animation: fillBar var(--duration, 800ms) linear forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0; }
+  to { width: 100%; }
+}
